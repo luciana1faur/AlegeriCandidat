@@ -22,3 +22,24 @@ int main()
    fd.close();
    return 0;
 }
+
+int exista(int s)
+{
+   fstream fd;
+   fd.open( "fdate.txt", ios::in);
+   int sec, c1, c2;
+   int gasit = 0;
+   fd >> sec >> c1 >> c2;
+   while (fd.good())
+   {
+      // Citire valida
+      if (sec == s)
+      {
+         gasit = 1;
+         break;
+      }
+      fd >> sec >> c1 >> c2;
+   }
+   fd.close();
+   return gasit;
+}
