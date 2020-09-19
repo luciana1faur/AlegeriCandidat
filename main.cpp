@@ -1,27 +1,6 @@
 #include <iostream>
 #include <fstream>
-
 using namespace std;
-
-int main()
-{
-   fstream fd;
-   int s, c1, c2;
-   char mesaj;
-   fd.open( "fdate.txt", ios::app);
-   mesaj = 'd';
-   while (tolower(mesaj) == 'd')
-   {
-      cout << "Introduceti setul (sectie cand_1 cand_2): ";
-      cin >> s >> c1 >> c2;
-      fd << s << '\t' << c1 << '\t' << c2 << endl;
-      cin.ignore();
-      cout << "Mai introduceti date? (d/n) ";
-      cin >> mesaj;
-   }
-   fd.close();
-   return 0;
-}
 
 int exista(int s)
 {
@@ -42,4 +21,29 @@ int exista(int s)
    }
    fd.close();
    return gasit;
+}
+
+int main()
+{
+   fstream fd;
+   int s, c1, c2;
+   char mesaj;
+   mesaj = 'd';
+   while (tolower(mesaj) == 'd')
+   {
+      cout << "Introduceti setul (sectie cand1 cand2): ";
+      cin >> s >> c1 >> c2;
+      if (exista(s))
+         cout << "Sectia a mai fost introdusa! " << endl;
+      else
+      {
+         fd.open( "fdate.txt", ios::app);
+         fd << s << '\t' << c1 << '\t' << c2 << endl;
+         fd.close();
+      }
+      cout << "Mai introduceti date? (d/n) ";
+      cin.ignore();
+      cin >> mesaj;
+   }
+   return 0;
 }
